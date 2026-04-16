@@ -19,7 +19,8 @@ const cardsOverlay = [
     desc: "Manajemen Data", 
     color: "bg-blue-600", 
     cardBg: "bg-white", 
-    borderColor: "border-white" 
+    url: "https://sim-pkk-link.com",
+    clickable: true 
   },
   { 
     icon: <FileText size={20} />, 
@@ -27,27 +28,29 @@ const cardsOverlay = [
     desc: "Laporan Digital", 
     color: "bg-amber-500", 
     cardBg: "bg-white", 
-    borderColor: "border-white" 
+    url: "https://e-reporting-link.com",
+    clickable: true 
   },
   { 
     icon: <Users size={20} />, 
     title: "Dasawisma", 
     desc: "Data Kelompok", 
-    color: "bg-emerald-600", 
-    cardBg: "bg-white", 
-    borderColor: "border-white" 
+    color: "bg-emerald-600", // Warnanya tetap hijau segar
+    cardBg: "bg-white",     // Tetap putih bersih
+    url: "#",
+    clickable: false 
   },
 ];
 
 export default function LandingPage() {
   return (
-    // overflow-x-hidden tetap ada biar gak goyang kiri-kanan
     <div className="min-h-screen bg-white text-slate-900 font-sans overflow-x-hidden">
+      
       <section className="relative min-h-screen w-full flex items-center bg-black py-20 lg:py-0">
          
          <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${bgHeroImage})` }} />
          
-         {/* OVERLAY */}
+         {/* OVERLAY GELAP PEKAT SESUAI GAMBAR 1 */}
          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#002d5a] via-[#002d5a]/95 via-60% to-[#001e3c]/40" />
          
          <div className="absolute inset-0 z-10 backdrop-blur-[1px]" />
@@ -77,28 +80,35 @@ export default function LandingPage() {
 
                   {/* Cards Area */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-10">
-                     {cardsOverlay.map((card, idx) => (
-                       <motion.div 
-                         key={idx} 
-                         initial={{ opacity: 0, scale: 0.5, y: 30 }} 
-                         animate={{ opacity: 1, scale: 1, y: 0 }} 
-                         transition={{ duration: 0.4, delay: 0.3 + idx * 0.1, ease: [0.34, 1.56, 0.64, 1] }} 
-                         whileHover={{ scale: 1.05 }} 
-                         className={`w-full ${card.cardBg} p-5 rounded-[1.3rem] flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer group`}
-                       >
-                         <div className={`${card.color} p-2.5 rounded-xl text-white shrink-0 flex items-center justify-center transition-transform group-hover:rotate-12 shadow-md`}>
-                           {card.icon}
-                         </div>
-                         <div className="flex flex-col">
-                           <h4 className="text-slate-900 font-bold text-[11px] md:text-[12px] uppercase tracking-wider leading-tight">
-                             {card.title}
-                           </h4>
-                           <p className="text-slate-500 text-[10px] font-medium italic mt-0.5">
-                             {card.desc}
-                           </p>
-                         </div>
-                       </motion.div>
-                     ))}
+                     {cardsOverlay.map((card, idx) => {
+                       // Gunakan tag 'a' hanya jika clickable, jika tidak gunakan 'div'
+                       const CardWrapper = card.clickable ? motion.a : motion.div;
+                       
+                       return (
+                         <CardWrapper
+                           key={idx}
+                           href={card.clickable ? card.url : undefined}
+                           target={card.clickable ? "_blank" : undefined}
+                           initial={{ opacity: 0, scale: 0.5, y: 30 }} 
+                           animate={{ opacity: 1, scale: 1, y: 0 }} 
+                           transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                           whileHover={card.clickable ? { scale: 1.05 } : {}}
+                           className={`w-full ${card.cardBg} p-5 rounded-[1.3rem] flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${card.clickable ? 'cursor-pointer' : 'cursor-not-allowed'} group`}
+                         >
+                           <div className={`${card.color} p-2.5 rounded-xl text-white shrink-0 flex items-center justify-center shadow-md transition-transform group-hover:rotate-6`}>
+                             {card.icon}
+                           </div>
+                           <div className="flex flex-col">
+                             <h4 className="text-slate-900 font-bold text-[11px] md:text-[12px] uppercase tracking-wider leading-tight">
+                               {card.title}
+                             </h4>
+                             <p className="text-slate-500 text-[10px] font-medium italic mt-0.5">
+                               {card.desc}
+                             </p>
+                           </div>
+                         </CardWrapper>
+                       );
+                     })}
                   </div>
                </motion.div>
 
