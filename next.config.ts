@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   },
 
   reactStrictMode: true,
+
   output: 'export',
 };
 

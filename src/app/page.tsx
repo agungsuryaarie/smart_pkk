@@ -11,20 +11,20 @@ const bgHeroImage =
 const cardsOverlay = [
   {
     title: "SIM PKK",
-    desc: "Manajemen Data",
+    desc: "Manajemen Data Surat",
     url: "https://simpkk.batubarakab.go.id/",
     clickable: true,
   },
   {
     title: "E-Reporting",
-    desc: "Laporan Digital",
+    desc: "Laporan Kegiatan Digital",
     url: "https://e-reportingpkk.batubarakab.go.id/",
     clickable: true,
   },
   {
     title: "Dasawisma",
     desc: "Data Kelompok",
-    url: "#",
+    url: "https://dasawisma.batubarakab.go.id/",
     clickable: false,
   },
 ];
