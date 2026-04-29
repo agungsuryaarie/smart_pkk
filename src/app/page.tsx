@@ -25,7 +25,7 @@ const cardsOverlay = [
     title: "Dasawisma",
     desc: "Data Kelompok",
     url: "https://dasawisma.batubarakab.go.id/",
-    clickable: false,
+    clickable: true,
   },
 ];
 
